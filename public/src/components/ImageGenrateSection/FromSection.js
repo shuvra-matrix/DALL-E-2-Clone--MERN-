@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./FromSection.module.css";
 import ImageSection from "./ImageSection";
 import { prompt } from "../../constant/constnant";
+import { Link } from "react-router-dom";
 
 const FromSection = (props) => {
   const [userInput, setUserInput] = useState({
@@ -95,6 +96,13 @@ const FromSection = (props) => {
         </div>
         <ImageSection isLoad={props.isLoder} imageUrl={props.imageUrl} />
         <button className={styles.generate}>Generate</button>
+        {props.imageUrl.length > 0 && (
+          <Link to={props.imageUrl} target="_blank">
+            <button className={styles.generate} download type="button">
+              Download
+            </button>
+          </Link>
+        )}
       </form>
     </div>
   );
