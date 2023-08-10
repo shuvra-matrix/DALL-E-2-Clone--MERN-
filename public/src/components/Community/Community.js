@@ -1,34 +1,33 @@
-import { Link } from "react-router-dom";
 import styles from "./Community.module.css";
-import { useState, useEffect, Fragment } from "react";
+// import { useState, useEffect } from "react";
 
 const Community = () => {
-  const [imageData, setImageData] = useState([]);
+  // const [imageData, setImageData] = useState([]);
 
-  const fetchData = async () => {
-    const url = "http://localhost:3030/api/v1/get";
-    const options = {
-      method: "GET",
+  // const fetchData = async () => {
+  //   const url = "http://localhost:3030/api/v1/get";
+  //   const options = {
+  //     method: "GET",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
 
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      setImageData(result);
+  //   try {
+  //     const response = await fetch(url, options);
+  //     const result = await response.json();
+  //     setImageData(result);
 
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className={styles["main-div"]}>
@@ -45,9 +44,6 @@ const Community = () => {
       </div>
       <div className={styles["image-section"]}>
         <h2>Coming Soon.....</h2>
-        {/* {imageData.map((data) => (
-          <img src={data.imageUrl} alt={data.query} key={data._id}></img>
-        ))} */}
       </div>
     </div>
   );
