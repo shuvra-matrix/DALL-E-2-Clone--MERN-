@@ -6,8 +6,9 @@
 }
 
 label {
-  font-size: 14px;
-  color: rgb(77, 72, 72);
+  font-size: 15px;
+  color: rgb(31, 31, 31);
+  font-weight: 400;
 }
 
 .lable label {
@@ -15,9 +16,16 @@ label {
 }
 
 .lable button {
-  background-color: transparent;
-  border: 0px;
+  background-color: #eaeaf0;
   color: rgb(77, 72, 72);
+  border: 0px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.lable button:hover {
+  cursor: pointer;
+  background-color: #dadada;
 }
 
 input {

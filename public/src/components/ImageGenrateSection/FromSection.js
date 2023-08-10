@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./FromSection.module.css";
 import ImageSection from "./ImageSection";
+import { prompt } from "../../constant/constnant";
 
 const FromSection = (props) => {
   const [userInput, setUserInput] = useState({
@@ -18,6 +19,18 @@ const FromSection = (props) => {
       return {
         ...previousData,
         [type]: value,
+      };
+    });
+  };
+
+  const surpriseInputHandler = () => {
+    const randomPrompt =
+      prompt[Math.floor(Math.random() * (prompt.length - 0) + 0)];
+
+    setUserInput((previousData) => {
+      return {
+        ...previousData,
+        query: randomPrompt,
       };
     });
   };
@@ -50,7 +63,9 @@ const FromSection = (props) => {
         <div className={styles["input-section"]}>
           <div className={styles["lable"]}>
             <label htmlFor="query">Prompt</label>
-            <button type="submit">Surprise me</button>
+            <button onClick={surpriseInputHandler} type="button">
+              Surprise me
+            </button>
           </div>
           <input
             id="query"
