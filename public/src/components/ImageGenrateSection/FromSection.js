@@ -33,11 +33,6 @@ const FromSection = (props) => {
       return;
     }
 
-    if (userInput.query.trim().length === 0) {
-      setQueryIsValid(true);
-      return;
-    }
-
     const randomPrompt =
       prompt[Math.floor(Math.random() * (prompt.length - 0) + 0)];
 
