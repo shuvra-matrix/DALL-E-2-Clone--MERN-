@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoos = require("mongoose");
 const cors = require("cors");
+const requestIp = require("request-ip");
 require("dotenv").config();
 
 const port = "3030";
@@ -12,6 +13,7 @@ const publicRoutes = require("./routes/public");
 
 app.use(express.json());
 app.use(cors());
+app.use(requestIp.mw());
 app.use(publicRoutes);
 
 mongoos

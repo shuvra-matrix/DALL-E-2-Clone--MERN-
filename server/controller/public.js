@@ -1,5 +1,5 @@
 const ApiAccess = require("../model/apiAccess");
-const Query = require("../model/query");
+const User = require("../model/query");
 require("dotenv").config();
 const axios = require("axios");
 
@@ -10,15 +10,12 @@ exports.getApi = (req, res, next) => {
 
 exports.dalleAPI = async (req, res, next) => {
   const API = process.env.API_LIST.split(",");
-
-  console.log(req.headers);
-  console.log(req.body);
   const host = req.headers["dalle-host"] || "";
   const key = req.headers["dalle-key"] || "";
   const query = req.body.query;
-  console.log(host);
-  console.log(key);
+  const name = req.body.name;
   console.log(query);
+  console.log(name);
 
   ApiAccess.find({ _id: process.env.API_ID }).then((result) => {
     const serverKey = result[0].key;
@@ -48,6 +45,21 @@ exports.dalleAPI = async (req, res, next) => {
         axios
           .request(options)
           .then((response) => {
+            const user = new User({
+              ip: req.clientIp,
+              name: name,
+              query: query,
+              imageUrl: response.data.data[0]["url"],
+            });
+            user
+              .save()
+              .then((result) => {
+                console.log(result);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
             res.status(200).json({ imageUrl: response.data });
           })
           .catch((error) => {

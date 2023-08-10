@@ -8,10 +8,6 @@ const FromSection = (props) => {
     name: "",
     query: "",
   });
-  const [userPlaceholder, setUserPlacehosder] = useState({
-    name: "",
-    query: "",
-  });
 
   const [nameIsValid, setNameIsValid] = useState(false);
   const [queryIsValid, setQueryIsValid] = useState(false);
@@ -55,12 +51,8 @@ const FromSection = (props) => {
       setQueryIsValid(true);
       return;
     }
+
     props.userDataHandler(userInput);
-    setUserPlacehosder(userInput);
-    setUserInput({
-      name: "",
-      query: "",
-    });
   };
 
   return (
@@ -71,7 +63,7 @@ const FromSection = (props) => {
           <input
             id="name"
             type="text"
-            placeholder={userPlaceholder.name || "Shuvra Chakrabarty"}
+            placeholder={"Shuvra Chakrabarty"}
             onChange={(e) => {
               userInputHandler(e.target.value, "name");
             }}
@@ -91,7 +83,7 @@ const FromSection = (props) => {
           <input
             id="query"
             type="text"
-            placeholder={userPlaceholder.query || "Enter you query"}
+            placeholder={"Enter you query"}
             onChange={(e) => {
               userInputHandler(e.target.value, "query");
             }}
