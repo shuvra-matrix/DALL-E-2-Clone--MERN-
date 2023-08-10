@@ -19,3 +19,10 @@
     height: 120px;
   }
 }
+
+@media (max-width: 400px) {
+  .header img {
+    width: 100px;
+    height: 100px;
+  }
+}
