@@ -62,7 +62,7 @@ const FromSection = (props) => {
             value={userInput.query}
           ></input>
         </div>
-        <ImageSection isLoad={props.isLoder} />
+        <ImageSection isLoad={props.isLoder} imageUrl={props.imageUrl} />
         <button className={styles.generate}>Generate</button>
       </form>
     </div>

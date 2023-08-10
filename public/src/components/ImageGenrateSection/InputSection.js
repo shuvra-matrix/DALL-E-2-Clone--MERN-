@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FromSection from "./FromSection";
 import styles from "./InputSection.module.css";
 import ShareSection from "./ShareSection";
 
 const InputSection = (props) => {
+  const [imageUrls, setImageUrl] = useState({});
   const [isLoder, setLoder] = useState(false);
-
   const userDataHandler = async (data) => {
     setLoder(true);
     const url = "http://localhost:3030/api/v1/dalle";
@@ -14,6 +14,7 @@ const InputSection = (props) => {
 
       headers: {
         "Content-Type": "application/json",
+
         "Dalle-Key":
           "aun74834hj3jh9930224554888ls55aa4574854rr4f5ffttrtr5dfd58452342havvvww",
         "Dalle-Host": "Dalle.shuvra.matrix",
@@ -27,14 +28,15 @@ const InputSection = (props) => {
 
     try {
       const response = await fetch(url, options);
-      const result = await response.text();
-      console.log(result);
+      const result = await response.json();
+      setImageUrl(result["imageUrl"]["data"][0]["url"]);
 
       setLoder(false);
     } catch (error) {
       console.error(error);
     }
   };
+  console.log(imageUrls);
 
   return (
     <div className={styles["main-div"]}>
@@ -45,8 +47,12 @@ const InputSection = (props) => {
           them with the community
         </p>
       </div>
-      <FromSection isLoder={isLoder} userDataHandler={userDataHandler} />
-      <ShareSection />
+      <FromSection
+        isLoder={isLoder}
+        userDataHandler={userDataHandler}
+        imageUrl={imageUrls}
+      />
+      <ShareSection imageUrl={imageUrls} />
     </div>
   );
 };

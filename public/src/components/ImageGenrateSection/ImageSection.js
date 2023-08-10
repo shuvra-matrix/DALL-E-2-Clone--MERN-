@@ -6,7 +6,9 @@ const ImageSection = (props) => {
   console.log(props.isLoad);
   return (
     <div className={styles["image-section"]}>
-      {!props.isLoad && <img src={Preview} alt="result"></img>}
+      {!props.isLoad && (
+        <img src={props.imageUrl || Preview} alt="result"></img>
+      )}
       {props.isLoad && <Loader />}
     </div>
   );

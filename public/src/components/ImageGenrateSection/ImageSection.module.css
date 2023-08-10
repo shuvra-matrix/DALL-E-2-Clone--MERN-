@@ -12,6 +12,7 @@
 }
 
 .image-section img {
-  width: 150px;
+  width: 188px;
   opacity: 0.7;
+  border-radius: 5px;
 }
