@@ -49,7 +49,7 @@ const FromSection = (props) => {
         </div>
         <div className={styles["input-section"]}>
           <div className={styles["lable"]}>
-            <label htmlFor="">Prompt</label>
+            <label htmlFor="query">Prompt</label>
             <button type="submit">Surprise me</button>
           </div>
           <input

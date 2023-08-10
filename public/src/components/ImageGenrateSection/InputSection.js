@@ -6,8 +6,34 @@ import ShareSection from "./ShareSection";
 const InputSection = (props) => {
   const [isLoder, setLoder] = useState(false);
 
-  const userDataHandler = (data) => {
+  const userDataHandler = async (data) => {
     setLoder(true);
+    const url = "http://localhost:3030/api/v1/dalle";
+    const options = {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        "Dalle-Key":
+          "aun74834hj3jh9930224554888ls55aa4574854rr4f5ffttrtr5dfd58452342havvvww",
+        "Dalle-Host": "Dalle.shuvra.matrix",
+      },
+
+      body: JSON.stringify({
+        query: data.query,
+        name: data.name,
+      }),
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.text();
+      console.log(result);
+
+      setLoder(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

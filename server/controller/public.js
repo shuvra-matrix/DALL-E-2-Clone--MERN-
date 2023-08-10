@@ -10,6 +10,9 @@ exports.getApi = (req, res, next) => {
 
 exports.dalleAPI = async (req, res, next) => {
   const API = process.env.API_LIST.split(",");
+
+  console.log(req.headers);
+  console.log(req.body);
   const host = req.headers["dalle-host"] || "";
   const key = req.headers["dalle-key"] || "";
   const query = req.body.query;
