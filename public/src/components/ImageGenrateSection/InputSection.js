@@ -4,7 +4,7 @@ import styles from "./InputSection.module.css";
 import ShareSection from "./ShareSection";
 
 const InputSection = (props) => {
-  const [imageUrls, setImageUrl] = useState({});
+  const [imageUrls, setImageUrl] = useState("");
   const [isLoder, setLoder] = useState(false);
   const userDataHandler = async (data) => {
     setLoder(true);

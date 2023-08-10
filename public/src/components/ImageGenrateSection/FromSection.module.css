@@ -44,3 +44,9 @@ input:focus {
   cursor: pointer;
   background-color: #0c5c2b;
 }
+
+@media (max-width: 512px) {
+  input {
+    width: 80%;
+  }
+}

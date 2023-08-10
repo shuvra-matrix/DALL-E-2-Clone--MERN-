@@ -7,7 +7,11 @@ const ImageSection = (props) => {
   return (
     <div className={styles["image-section"]}>
       {!props.isLoad && (
-        <img src={props.imageUrl || Preview} alt="result"></img>
+        <img
+          src={props.imageUrl || Preview}
+          className={props.imageUrl.length === 0 && styles["img-opacity"]}
+          alt="result"
+        ></img>
       )}
       {props.isLoad && <Loader />}
     </div>

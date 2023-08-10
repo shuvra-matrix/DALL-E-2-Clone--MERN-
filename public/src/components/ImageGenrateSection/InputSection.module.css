@@ -10,3 +10,9 @@
 .main-div p {
   color: #6b6b6b;
 }
+
+@media (max-width: 512px) {
+  .main-div {
+    width: 80%;
+  }
+}
