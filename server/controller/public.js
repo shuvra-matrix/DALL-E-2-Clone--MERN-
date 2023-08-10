@@ -104,7 +104,7 @@ exports.dalleAPI = async (req, res, next) => {
 exports.getImage = (req, res, next) => {
   User.find()
     .sort({ _id: -1 })
-    .limit(8)
+    .limit(20)
     .then((data) => {
       console.log(data);
       res.status(200).json(data);

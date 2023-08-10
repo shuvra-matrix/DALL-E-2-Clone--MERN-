@@ -9,7 +9,7 @@ const ShareSection = (props) => {
         Once you have created the image you want, you can share it with others
         in the community
       </p>
-      <Link to="/">
+      <Link to="/community">
         <Button type="submit">Share with the community</Button>
       </Link>
     </div>

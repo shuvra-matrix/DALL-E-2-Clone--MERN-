@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import styles from "./Community.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 const Community = () => {
   const [imageData, setImageData] = useState([]);
@@ -43,9 +44,10 @@ const Community = () => {
         <input type="text" placeholder="Search somthing...."></input>
       </div>
       <div className={styles["image-section"]}>
-        {imageData.map((data) => (
+        <h2>Coming Soon.....</h2>
+        {/* {imageData.map((data) => (
           <img src={data.imageUrl} alt={data.query} key={data._id}></img>
-        ))}
+        ))} */}
       </div>
     </div>
   );
