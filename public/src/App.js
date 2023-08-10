@@ -1,13 +1,17 @@
 import Header from "./components/Layout/Header";
-import { Fragment } from "react";
 import InputSection from "./components/ImageGenrateSection/InputSection";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Community from "./components/Community/Community";
 
 function App() {
   return (
-    <Fragment>
+    <BrowserRouter>
       <Header />
-      <InputSection />
-    </Fragment>
+      <Routes>
+        <Route path="/" element={<InputSection />} />
+        <Route path="/community" element={<Community />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

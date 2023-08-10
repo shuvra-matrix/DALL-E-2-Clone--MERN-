@@ -1,5 +1,6 @@
 import Button from "../UI/Button";
 import styles from "./ShareSection.module.css";
+import { Link } from "react-router-dom";
 
 const ShareSection = (props) => {
   return (
@@ -8,7 +9,9 @@ const ShareSection = (props) => {
         Once you have created the image you want, you can share it with others
         in the community
       </p>
-      <Button type="submit">Share with the community</Button>
+      <Link to="/community">
+        <Button type="submit">Share with the community</Button>
+      </Link>
     </div>
   );
 };
