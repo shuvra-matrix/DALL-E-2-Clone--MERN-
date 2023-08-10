@@ -1,0 +1,12 @@
+.main-div {
+  width: 60%;
+  margin: 2rem auto;
+}
+
+.main-div h2 {
+  color: rgb(34, 32, 32);
+}
+
+.main-div p {
+  color: #6b6b6b;
+}

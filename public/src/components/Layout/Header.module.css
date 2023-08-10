@@ -1,0 +1,35 @@
+.header {
+  margin: 0;
+  padding: 20px 30px;
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.header img {
+  width: 150px;
+  height: 150px;
+}
+
+.header button {
+  background-color: #6464ed;
+  color: white;
+  padding: 10px 20px;
+  border: 0px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.header button:hover {
+  background-color: #4545c9;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .header img {
+    width: 120px;
+    height: 120px;
+  }
+}

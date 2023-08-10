@@ -1,0 +1,46 @@
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 14px;
+  color: rgb(77, 72, 72);
+}
+
+.lable label {
+  margin-right: 10px;
+}
+
+.lable button {
+  background-color: transparent;
+  border: 0px;
+  color: rgb(77, 72, 72);
+}
+
+input {
+  width: 65%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1.5px solid rgb(182, 182, 182);
+  background-color: #f9fafb;
+}
+
+input:focus {
+  outline: none;
+}
+
+.generate {
+  background-color: #136b34;
+  color: white;
+  padding: 10px 20px;
+  border: 0px;
+  border-radius: 5px;
+}
+
+.generate:hover {
+  cursor: pointer;
+  background-color: #0c5c2b;
+}

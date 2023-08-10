@@ -1,8 +1,13 @@
+import Header from "./components/Layout/Header";
+import { Fragment } from "react";
+import InputSection from "./components/ImageGenrateSection/InputSection";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-    </div>
+    <Fragment>
+      <Header />
+      <InputSection />
+    </Fragment>
   );
 }
 

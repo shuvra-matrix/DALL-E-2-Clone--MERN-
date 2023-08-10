@@ -1,0 +1,17 @@
+.image-section {
+  width: 200px;
+  height: 200px;
+  border: 1.5px solid rgb(182, 182, 182);
+  margin-bottom: 1rem;
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #f8fbf8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  width: 150px;
+  opacity: 0.7;
+}
