@@ -8,11 +8,13 @@ const FromSection = (props) => {
     name: "",
     query: "",
   });
-
   const [userPlaceholder, setUserPlacehosder] = useState({
     name: "",
     query: "",
   });
+
+  const [nameIsValid, setNameIsValid] = useState(false);
+  const [queryIsValid, setQueryIsValid] = useState(false);
 
   const userInputHandler = (value, type) => {
     setUserInput((previousData) => {
@@ -21,9 +23,21 @@ const FromSection = (props) => {
         [type]: value,
       };
     });
+    setNameIsValid(false);
+    setQueryIsValid(false);
   };
 
   const surpriseInputHandler = () => {
+    if (userInput.name.trim().length === 0) {
+      setNameIsValid(true);
+      return;
+    }
+
+    if (userInput.query.trim().length === 0) {
+      setQueryIsValid(true);
+      return;
+    }
+
     const randomPrompt =
       prompt[Math.floor(Math.random() * (prompt.length - 0) + 0)];
 
@@ -37,6 +51,15 @@ const FromSection = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    if (userInput.name.trim().length === 0) {
+      setNameIsValid(true);
+      return;
+    }
+
+    if (userInput.query.trim().length === 0) {
+      setQueryIsValid(true);
+      return;
+    }
     props.userDataHandler(userInput);
     setUserPlacehosder(userInput);
     setUserInput({
@@ -58,6 +81,9 @@ const FromSection = (props) => {
               userInputHandler(e.target.value, "name");
             }}
             value={userInput.name}
+            className={
+              !nameIsValid ? styles["input-valid"] : styles["input-invalid"]
+            }
           ></input>
         </div>
         <div className={styles["input-section"]}>
@@ -75,6 +101,9 @@ const FromSection = (props) => {
               userInputHandler(e.target.value, "query");
             }}
             value={userInput.query}
+            className={
+              !queryIsValid ? styles["input-valid"] : styles["input-invalid"]
+            }
           ></input>
         </div>
         <ImageSection isLoad={props.isLoder} imageUrl={props.imageUrl} />

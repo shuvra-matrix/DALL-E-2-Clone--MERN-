@@ -32,8 +32,16 @@ input {
   width: 65%;
   padding: 8px;
   border-radius: 5px;
+}
+
+.input-valid {
   border: 1.5px solid rgb(182, 182, 182);
   background-color: #f9fafb;
+}
+
+.input-invalid {
+  border: 1.5px solid rgb(255, 153, 153);
+  background-color: #fdd2cd;
 }
 
 input:focus {
