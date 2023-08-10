@@ -1,3 +1,4 @@
+import Button from "../UI/Button";
 import styles from "./ShareSection.module.css";
 
 const ShareSection = (props) => {
@@ -7,7 +8,7 @@ const ShareSection = (props) => {
         Once you have created the image you want, you can share it with others
         in the community
       </p>
-      <button type="submit">Share with the community</button>
+      <Button type="submit">Share with the community</Button>
     </div>
   );
 };
