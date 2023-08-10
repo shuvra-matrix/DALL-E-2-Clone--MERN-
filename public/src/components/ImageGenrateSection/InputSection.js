@@ -9,7 +9,7 @@ const InputSection = (props) => {
   const [isLoder, setLoder] = useState(false);
   const userDataHandler = async (data) => {
     setLoder(true);
-    const url = "http://localhost:3030/api/v1/dalle";
+    const url = "https://dalle2-api.onrender.com/api/v1/dalle";
     const options = {
       method: "POST",
 
