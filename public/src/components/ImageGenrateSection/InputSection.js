@@ -4,6 +4,7 @@ import styles from "./InputSection.module.css";
 import ShareSection from "./ShareSection";
 
 const InputSection = (props) => {
+  const [queryResult, setQueryResult] = useState([]);
   const [imageUrls, setImageUrl] = useState("");
   const [isLoder, setLoder] = useState(false);
   const userDataHandler = async (data) => {
@@ -29,6 +30,7 @@ const InputSection = (props) => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      setQueryResult(result);
       setImageUrl(result["imageUrl"]["data"][0]["url"]);
 
       setLoder(false);
@@ -36,7 +38,6 @@ const InputSection = (props) => {
       console.error(error);
     }
   };
-  console.log(imageUrls);
 
   return (
     <div className={styles["main-div"]}>
@@ -52,7 +53,7 @@ const InputSection = (props) => {
         userDataHandler={userDataHandler}
         imageUrl={imageUrls}
       />
-      <ShareSection imageUrl={imageUrls} />
+      <ShareSection queryResult={queryResult} />
     </div>
   );
 };

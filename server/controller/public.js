@@ -2,6 +2,7 @@ const ApiAccess = require("../model/apiAccess");
 const User = require("../model/query");
 require("dotenv").config();
 const axios = require("axios");
+const Community = require("../model/community");
 
 exports.getApi = (req, res, next) => {
   res.status(200).json({ message: "Welcome to Dall-E 2 API" });
@@ -72,4 +73,17 @@ exports.dalleAPI = async (req, res, next) => {
       res.status(500).json({ message: "Invalid Credentials" });
     }
   });
+};
+
+exports.getImage = (req, res, next) => {
+  User.find()
+    .sort({ _id: -1 })
+    .limit(8)
+    .then((data) => {
+      console.log(data);
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
