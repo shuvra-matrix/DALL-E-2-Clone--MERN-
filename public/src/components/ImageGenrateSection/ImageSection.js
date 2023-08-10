@@ -1,10 +1,13 @@
 import styles from "./ImageSection.module.css";
-import Peview from "../../assets/preview.png";
+import Preview from "../../assets/preview.png";
+import Loader from "../UI/Loder";
 
 const ImageSection = (props) => {
+  console.log(props.isLoad);
   return (
     <div className={styles["image-section"]}>
-      <img src={Peview} alt="result"></img>
+      {!props.isLoad && <img src={Preview} alt="result"></img>}
+      {props.isLoad && <Loader />}
     </div>
   );
 };

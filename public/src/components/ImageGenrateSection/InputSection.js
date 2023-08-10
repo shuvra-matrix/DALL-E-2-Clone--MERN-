@@ -1,8 +1,15 @@
+import { useState, useEffect } from "react";
 import FromSection from "./FromSection";
 import styles from "./InputSection.module.css";
 import ShareSection from "./ShareSection";
 
 const InputSection = (props) => {
+  const [isLoder, setLoder] = useState(false);
+
+  const userDataHandler = (data) => {
+    setLoder(true);
+  };
+
   return (
     <div className={styles["main-div"]}>
       <div>
@@ -12,7 +19,7 @@ const InputSection = (props) => {
           them with the community
         </p>
       </div>
-      <FromSection />
+      <FromSection isLoder={isLoder} userDataHandler={userDataHandler} />
       <ShareSection />
     </div>
   );
