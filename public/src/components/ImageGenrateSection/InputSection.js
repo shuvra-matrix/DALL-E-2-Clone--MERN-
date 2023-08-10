@@ -16,8 +16,7 @@ const InputSection = (props) => {
       headers: {
         "Content-Type": "application/json",
 
-        "Dalle-Key":
-          "aun74834hj3jh9930224554888ls55aa4574854rr4f5ffttrtr5dfd58452342havvvww",
+        "Dalle-Key": process.env.REACT_APP_API_KEY,
         "Dalle-Host": "Dalle.shuvra.matrix",
       },
 
