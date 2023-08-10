@@ -12,7 +12,7 @@ exports.dalleAPI = async (req, res, next) => {
   const API = process.env.API_LIST.split(",");
   const host = req.headers["dalle-host"] || "";
   const key = req.headers["dalle-key"] || "";
-  const query = req.body;
+  const query = req.body.query;
   console.log(host);
   console.log(key);
   console.log(query);
@@ -35,7 +35,7 @@ exports.dalleAPI = async (req, res, next) => {
           "X-RapidAPI-Host": "openai80.p.rapidapi.com",
         },
         data: {
-          prompt: "A cute baby sea otter",
+          prompt: query,
           n: 1,
           size: "1024x1024",
         },
