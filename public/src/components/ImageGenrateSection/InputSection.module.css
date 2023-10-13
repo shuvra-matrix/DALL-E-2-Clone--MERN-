@@ -11,6 +11,14 @@
   color: #6b6b6b;
 }
 
+.error {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: rgb(199, 67, 93);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 @media (max-width: 512px) {
   .main-div {
     width: 80%;

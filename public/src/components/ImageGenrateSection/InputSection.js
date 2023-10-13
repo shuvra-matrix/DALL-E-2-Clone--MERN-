@@ -3,12 +3,16 @@ import FromSection from "./FromSection";
 import styles from "./InputSection.module.css";
 import ShareSection from "./ShareSection";
 
-const InputSection = (props) => {
+const InputSection = () => {
   const [queryResult, setQueryResult] = useState([]);
   const [imageUrls, setImageUrl] = useState("");
   const [isLoder, setLoder] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+
   const userDataHandler = async (data) => {
     setLoder(true);
+    setIsError(false);
     const url = "https://dalle2-api.onrender.com/api/v1/dalle";
     const options = {
       method: "POST",
@@ -29,12 +33,21 @@ const InputSection = (props) => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      setQueryResult(result);
-      setImageUrl(result["imageUrl"]["data"][0]["url"]);
-
       setLoder(false);
+      if (result.error === "error") {
+        const message = result.message;
+        setErrorMessage(message);
+        setIsError(true);
+      } else {
+        setIsError(false);
+        setQueryResult(result);
+        setImageUrl(result["imageUrl"]["data"][0]["url"]);
+      }
     } catch (error) {
       console.error(error);
+      setLoder(false);
+      setErrorMessage("Server did't respond");
+      setIsError(true);
     }
   };
 
@@ -47,6 +60,7 @@ const InputSection = (props) => {
           them with the community
         </p>
       </div>
+      {isError && <div className={styles["error"]}>{errorMessage}</div>}
       <FromSection
         isLoder={isLoder}
         userDataHandler={userDataHandler}

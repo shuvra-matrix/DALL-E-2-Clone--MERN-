@@ -2,6 +2,7 @@ const ApiAccess = require("../model/apiAccess");
 const User = require("../model/query");
 require("dotenv").config();
 const axios = require("axios");
+const { validationResult } = require("express-validator");
 
 exports.getApi = (req, res, next) => {
   res.status(200).json({ message: "Welcome to Dall-E 2 API" });
@@ -13,6 +14,16 @@ exports.dalleAPI = async (req, res, next) => {
   const key = req.headers["dalle-key"] || "";
   const query = req.body.query;
   const name = req.body.name;
+
+  const error = validationResult(req);
+
+  if (!error.isEmpty()) {
+    console.log(error.array());
+    return res.status(500).json({
+      error: "error",
+      message: "Invalid Input Data",
+    });
+  }
 
   let currentApiIndex = req.global[0]["apikeyindex"];
   let maxApiIndex = req.global[0]["maxApiKey"];
@@ -90,13 +101,17 @@ exports.dalleAPI = async (req, res, next) => {
           })
           .catch((error) => {
             console.log(error);
-            res.status(500).json({ message: "Server did't respond" });
+            res
+              .status(500)
+              .json({ message: "Server did't respond", error: "error" });
           });
       } catch (error) {
-        res.status(500).json({ message: "Server did't respond" });
+        res
+          .status(500)
+          .json({ message: "Server did't respond", error: "error" });
       }
     } else {
-      res.status(500).json({ message: "Invalid Credentials" });
+      res.status(500).json({ message: "Invalid Credentials", error: "error" });
     }
   });
 };
