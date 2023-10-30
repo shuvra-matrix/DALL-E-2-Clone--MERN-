@@ -145,12 +145,12 @@ exports.dalleAPI = async (req, res, next) => {
   });
 };
 
-exports.getImage = (req, res, next) => {
-  User.find()
+exports.getCommunityData = (req, res, next) => {
+  CommunityModel.find()
     .sort({ _id: -1 })
-    .limit(20)
+    .limit(40)
     .then((data) => {
-      console.log(data);
+      console.log("hi");
       res.status(200).json(data);
     })
     .catch((error) => {
@@ -175,6 +175,4 @@ exports.sendCommunity = (req, res, next) => {
       console.log(err);
       res.status(200).json({ message: "error" });
     });
-
-  console.log(req.body);
 };

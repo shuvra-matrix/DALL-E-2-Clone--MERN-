@@ -11,7 +11,7 @@ router.post(
   check("name").isString().withMessage("Invaid Input"),
   publicController.dalleAPI
 );
-router.get("/api/v1/get", publicController.getImage);
+router.get("/api/v1/get/community", publicController.getCommunityData);
 
 router.post("/api/v1/dalle/community", publicController.sendCommunity);
 

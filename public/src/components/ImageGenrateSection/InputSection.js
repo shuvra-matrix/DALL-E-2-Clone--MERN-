@@ -4,7 +4,7 @@ import styles from "./InputSection.module.css";
 import ShareSection from "./ShareSection";
 
 const InputSection = () => {
-  const [queryResult, setQueryResult] = useState([]);
+  const [queryResult, setQueryResult] = useState(null);
   const [imageUrls, setImageUrl] = useState("");
   const [isLoder, setLoder] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -50,6 +50,7 @@ const InputSection = () => {
       setIsError(true);
     }
   };
+  console.log("index");
 
   return (
     <div className={styles["main-div"]}>
@@ -66,7 +67,8 @@ const InputSection = () => {
         userDataHandler={userDataHandler}
         imageUrl={imageUrls}
       />
-      <ShareSection queryResult={queryResult} />
+
+      {queryResult && <ShareSection queryResult={queryResult} />}
     </div>
   );
 };

@@ -9,8 +9,8 @@ const Header = (props) => {
       <Link to="/">
         <img src={Logo} alt="opnai logo"></img>
       </Link>
-      <Link to="/">
-        <Button type="submit">Create</Button>
+      <Link to="/community">
+        <Button type="submit">Community</Button>
       </Link>
     </header>
   );

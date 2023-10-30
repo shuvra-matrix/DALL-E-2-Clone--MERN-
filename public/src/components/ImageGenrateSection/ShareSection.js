@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../UI/Button";
 import styles from "./ShareSection.module.css";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ShareSection = (props) => {
   const [isRedirect, setRedirect] = useState(false);
@@ -15,9 +15,6 @@ const ShareSection = (props) => {
 
       headers: {
         "Content-Type": "application/json",
-
-        "Dalle-Key": process.env.REACT_APP_API_KEY,
-        "Dalle-Host": "Dalle.shuvra.matrix",
       },
 
       body: JSON.stringify(props),
@@ -28,14 +25,13 @@ const ShareSection = (props) => {
       const result = await response.json();
 
       console.log(result);
+      setRedirect(true);
     } catch (error) {
       console.error(error);
     }
-
-    console.log("hi");
   };
 
-  console.log(props);
+  console.log("hi");
 
   return (
     <div className={styles.share}>
@@ -47,6 +43,7 @@ const ShareSection = (props) => {
       <form onSubmit={submitHandler}>
         <Button type="submit">Share with the community</Button>
       </form>
+      {isRedirect && <Navigate to="/community" />}
     </div>
   );
 };

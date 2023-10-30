@@ -1,33 +1,35 @@
 import styles from "./Community.module.css";
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Community = () => {
-  // const [imageData, setImageData] = useState([]);
+  const [imageData, setImageData] = useState([]);
+  console.log("hi");
 
-  // const fetchData = async () => {
-  //   const url = "http://localhost:3030/api/v1/get";
-  //   const options = {
-  //     method: "GET",
+  useEffect(() => {
+    console.log("api");
+    const imageData = async () => {
+      const url = "http://localhost:3030/api/v1/get/community";
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  //   try {
-  //     const response = await fetch(url, options);
-  //     const result = await response.json();
-  //     setImageData(result);
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        setImageData(result);
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  //     console.log(result);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+    imageData();
+  }, []);
 
   return (
     <div className={styles["main-div"]}>
@@ -43,7 +45,24 @@ const Community = () => {
         <input type="text" placeholder="Search somthing...."></input>
       </div>
       <div className={styles["image-section"]}>
-        <h2>Coming Soon.....</h2>
+        {imageData.map((data) => (
+          <div key={data["_id"]} className={styles["main-images-div"]}>
+            <div className={styles["images-div"]}>
+              <img
+                src={data["communityData"]["imageUrl"]}
+                alt="imagedata"
+              ></img>
+            </div>
+            <div className={styles["text-div"]}>
+              <div className={styles["name-div"]}>
+                <p>{data["communityData"]["name"].slice(0, 1)}</p>
+              </div>
+              <p className={styles["prompt"]}>
+                {data["communityData"]["query"].slice(0, 30) + "....."}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
