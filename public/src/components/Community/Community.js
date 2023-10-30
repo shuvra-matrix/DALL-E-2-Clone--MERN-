@@ -40,7 +40,7 @@ const Community = () => {
 
   useEffect(() => {
     const getQueryData = async () => {
-      const url = "https://dalle2-api.onrender.com/post/community";
+      const url = "https://dalle2-api.onrender.com/api/v1/post/community";
 
       const options = {
         method: "POST",
