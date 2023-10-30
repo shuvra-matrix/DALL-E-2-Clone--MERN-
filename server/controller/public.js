@@ -4,6 +4,7 @@ require("dotenv").config();
 const axios = require("axios");
 const { validationResult } = require("express-validator");
 const cloudinary = require("cloudinary").v2;
+const CommunityModel = require("../model/community");
 
 cloudinary.config({
   cloud_name: "dqone7ala",
@@ -157,4 +158,23 @@ exports.getImage = (req, res, next) => {
     });
 };
 
-exports.sendCommunity = (req, res, next) => {};
+exports.sendCommunity = (req, res, next) => {
+  const queryData = req.body.queryResult;
+
+  const community = new CommunityModel({
+    communityData: queryData,
+  });
+
+  community
+    .save()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json({ message: "done" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(200).json({ message: "error" });
+    });
+
+  console.log(req.body);
+};

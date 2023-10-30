@@ -13,4 +13,6 @@ router.post(
 );
 router.get("/api/v1/get", publicController.getImage);
 
+router.post("/api/v1/dalle/community", publicController.sendCommunity);
+
 module.exports = router;
