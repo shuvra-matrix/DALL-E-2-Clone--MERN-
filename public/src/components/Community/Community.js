@@ -1,5 +1,6 @@
 import styles from "./Community.module.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Community = () => {
   const [imageData, setImageData] = useState([]);
@@ -18,7 +19,7 @@ const Community = () => {
         },
       };
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       try {
         const response = await fetch(url, options);
@@ -98,43 +99,47 @@ const Community = () => {
         enterQuery.length > 0 ? (
           <div className={styles["image-section"]}>
             {imageSearchData.map((data) => (
-              <div key={data["_id"]} className={styles["main-images-div"]}>
-                <div className={styles["images-div"]}>
-                  <img
-                    src={data["communityData"]["imageUrl"]}
-                    alt="imagedata"
-                  ></img>
-                </div>
-                <div className={styles["text-div"]}>
-                  <div className={styles["name-div"]}>
-                    <p>{data["communityData"]["name"].slice(0, 1)}</p>
+              <Link to={data["communityData"]["imageUrl"]} target="_blank">
+                <div key={data["_id"]} className={styles["main-images-div"]}>
+                  <div className={styles["images-div"]}>
+                    <img
+                      src={data["communityData"]["imageUrl"]}
+                      alt="imagedata"
+                    ></img>
                   </div>
-                  <p className={styles["prompt"]}>
-                    {data["communityData"]["query"].slice(0, 30) + "....."}
-                  </p>
+                  <div className={styles["text-div"]}>
+                    <div className={styles["name-div"]}>
+                      <p>{data["communityData"]["name"].slice(0, 1)}</p>
+                    </div>
+                    <p className={styles["prompt"]}>
+                      {data["communityData"]["query"].slice(0, 30) + "....."}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
           <div className={styles["image-section"]}>
             {imageData.map((data) => (
-              <div key={data["_id"]} className={styles["main-images-div"]}>
-                <div className={styles["images-div"]}>
-                  <img
-                    src={data["communityData"]["imageUrl"]}
-                    alt="imagedata"
-                  ></img>
-                </div>
-                <div className={styles["text-div"]}>
-                  <div className={styles["name-div"]}>
-                    <p>{data["communityData"]["name"].slice(0, 1)}</p>
+              <Link to={data["communityData"]["imageUrl"]} target="_blank">
+                <div key={data["_id"]} className={styles["main-images-div"]}>
+                  <div className={styles["images-div"]}>
+                    <img
+                      src={data["communityData"]["imageUrl"]}
+                      alt="imagedata"
+                    ></img>
                   </div>
-                  <p className={styles["prompt"]}>
-                    {data["communityData"]["query"].slice(0, 30) + "....."}
-                  </p>
+                  <div className={styles["text-div"]}>
+                    <div className={styles["name-div"]}>
+                      <p>{data["communityData"]["name"].slice(0, 1)}</p>
+                    </div>
+                    <p className={styles["prompt"]}>
+                      {data["communityData"]["query"].slice(0, 30) + "....."}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )
