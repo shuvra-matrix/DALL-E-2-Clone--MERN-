@@ -40,6 +40,11 @@ label {
 .image-section img {
   width: 250px;
   border-radius: 5px;
+  opacity: 0.95;
+}
+
+.image-section img:hover {
+  opacity: 1;
 }
 
 .main-images-div {
@@ -52,7 +57,7 @@ label {
 
 .text-div {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.767);
+  background-color: rgb(0 0 0 / 76%);
   bottom: 3px;
   color: white;
   display: flex;
@@ -79,14 +84,18 @@ label {
   font-weight: 500;
 }
 
+.prompt {
+  margin-right: 5px;
+}
+
 @media (max-width: 690px) {
   .image-section {
-    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-columns: repeat(auto-fill, 200px);
     gap: 15px;
   }
 
   .image-section img {
-    width: 150px;
+    width: 200px;
   }
 }
 

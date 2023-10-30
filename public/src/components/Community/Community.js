@@ -88,7 +88,7 @@ const Community = () => {
         </p>
       </div>
       <div className={styles["search-section"]}>
-        <label htmlFor="">Search posts</label>
+        <label htmlFor="">Search posts by creator name or any keyword </label>
         <input
           onChange={queryInputHandler}
           type="text"
@@ -99,8 +99,12 @@ const Community = () => {
         enterQuery.length > 0 ? (
           <div className={styles["image-section"]}>
             {imageSearchData.map((data) => (
-              <Link to={data["communityData"]["imageUrl"]} target="_blank">
-                <div key={data["_id"]} className={styles["main-images-div"]}>
+              <Link
+                key={data["_id"]}
+                to={data["communityData"]["imageUrl"]}
+                target="_blank"
+              >
+                <div className={styles["main-images-div"]}>
                   <div className={styles["images-div"]}>
                     <img
                       src={data["communityData"]["imageUrl"]}
@@ -122,8 +126,12 @@ const Community = () => {
         ) : (
           <div className={styles["image-section"]}>
             {imageData.map((data) => (
-              <Link to={data["communityData"]["imageUrl"]} target="_blank">
-                <div key={data["_id"]} className={styles["main-images-div"]}>
+              <Link
+                key={data["_id"]}
+                to={data["communityData"]["imageUrl"]}
+                target="_blank"
+              >
+                <div className={styles["main-images-div"]}>
                   <div className={styles["images-div"]}>
                     <img
                       src={data["communityData"]["imageUrl"]}
@@ -144,7 +152,7 @@ const Community = () => {
           </div>
         )
       ) : (
-        <h2> No images found</h2>
+        <h2> No Images Found</h2>
       )}
     </div>
   );
