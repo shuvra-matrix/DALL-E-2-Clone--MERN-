@@ -91,10 +91,13 @@ exports.dalleAPI = async (req, res, next) => {
               });
             }
 
+            const uniqueFileName =
+              name + "-" + Date.now() + "-" + Math.round(Math.random() * 1e9);
+
             const options = {
-              unique_filename: true,
-              overwrite: false,
-              public_id: "Dalle/image" + name,
+              unique_filename: false,
+              overwrite: true,
+              public_id: "Dalle/image" + uniqueFileName,
             };
 
             cloudinary.uploader.upload(
