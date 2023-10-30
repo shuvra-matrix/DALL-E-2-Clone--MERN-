@@ -3,6 +3,13 @@ const User = require("../model/query");
 require("dotenv").config();
 const axios = require("axios");
 const { validationResult } = require("express-validator");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dqone7ala",
+  api_key: process.env.CLOUDINARY_API,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 exports.getApi = (req, res, next) => {
   res.status(200).json({ message: "Welcome to Dall-E 2 API" });
@@ -82,22 +89,43 @@ exports.dalleAPI = async (req, res, next) => {
               });
             }
 
-            const user = new User({
-              ip: req.clientIp,
-              name: name,
-              query: query,
-              imageUrl: response.data.data[0]["url"],
-            });
-            user
-              .save()
-              .then((result) => {
-                console.log(result);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+            const options = {
+              unique_filename: true,
+              overwrite: true,
+              public_id: "Dalle/image" + name,
+            };
 
-            res.status(200).json({ imageUrl: response.data });
+            cloudinary.uploader.upload(
+              response.data.data[0]["url"],
+              options,
+              (error, result) => {
+                if (error) {
+                  return res
+                    .status(500)
+                    .json({ message: "Server did't respond", error: "error" });
+                }
+                const user = new User({
+                  ip: req.clientIp,
+                  name: name,
+                  query: query,
+                  imageUrl: result["secure_url"],
+                });
+                user
+                  .save()
+                  .then((result) => {
+                    console.log(result);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+
+                res.status(200).json({
+                  imageUrl: result["secure_url"],
+                  name: name,
+                  query: query,
+                });
+              }
+            );
           })
           .catch((error) => {
             console.log(error);
@@ -128,3 +156,5 @@ exports.getImage = (req, res, next) => {
       console.log(error);
     });
 };
+
+exports.sendCommunity = (req, res, next) => {};

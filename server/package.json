@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.4.0",
-    "cloudinary": "^1.40.0",
+    "cloudinary": "^1.41.0",
     "connect-mongodb-session": "^3.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

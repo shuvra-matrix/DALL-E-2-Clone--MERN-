@@ -13,7 +13,7 @@ const InputSection = () => {
   const userDataHandler = async (data) => {
     setLoder(true);
     setIsError(false);
-    const url = "https://dalle2-api.onrender.com/api/v1/dalle";
+    const url = "http://localhost:3030/api/v1/dalle";
     const options = {
       method: "POST",
 
@@ -41,7 +41,7 @@ const InputSection = () => {
       } else {
         setIsError(false);
         setQueryResult(result);
-        setImageUrl(result["imageUrl"]["data"][0]["url"]);
+        setImageUrl(result.imageUrl);
       }
     } catch (error) {
       console.error(error);

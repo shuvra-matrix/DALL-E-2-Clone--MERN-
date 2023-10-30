@@ -3,7 +3,6 @@ import Preview from "../../assets/preview.png";
 import Loader from "../UI/Loder";
 
 const ImageSection = (props) => {
-  console.log(props.isLoad);
   return (
     <div className={styles["image-section"]}>
       {!props.isLoad && (
