@@ -93,12 +93,6 @@ To run DALL-E 2 locally, follow these steps:
 
 4. If you don't remember any prompt then click surprise me and generate.
 
-## Upcoming Features
-
-We have exciting plans for the future of DALL-E 2 Clone, including:
-
-Community Sharing: Share your generated images with the DALL-E 2 community and explore creations from others.
-
 ## Thank You, OpenAI!
 
 I want to express our gratitude to OpenAI for their groundbreaking research and for providing access to the incredible DALL-E model through their API. This project would not have been possible without OpenAI's contributions to the field of artificial intelligence.

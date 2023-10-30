@@ -11,7 +11,7 @@ const Community = () => {
   useEffect(() => {
     console.log("api");
     const imageData = async () => {
-      const url = "http://localhost:3030/api/v1/get/community";
+      const url = "https://dalle2-api.onrender.com/api/v1/get/community";
       const options = {
         method: "GET",
         headers: {
@@ -25,7 +25,6 @@ const Community = () => {
         const response = await fetch(url, options);
         const result = await response.json();
         setImageData(result);
-        console.log(result);
       } catch (error) {
         console.error(error);
       }
@@ -41,7 +40,7 @@ const Community = () => {
 
   useEffect(() => {
     const getQueryData = async () => {
-      const url = "http://localhost:3030/api/v1/post/community";
+      const url = "https://dalle2-api.onrender.com/post/community";
 
       const options = {
         method: "POST",
@@ -63,7 +62,6 @@ const Community = () => {
         } else {
           setImageFound(false);
         }
-        console.log(result);
       } catch (error) {
         console.error(error);
       }

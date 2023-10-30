@@ -8,7 +8,7 @@ const ShareSection = (props) => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:3030/api/v1/dalle/community";
+    const url = "https://dalle2-api.onrender.com/api/v1/dalle/community";
     const options = {
       method: "POST",
 
@@ -23,7 +23,6 @@ const ShareSection = (props) => {
       const response = await fetch(url, options);
       const result = await response.json();
 
-      console.log(result);
       setRedirect(true);
     } catch (error) {
       console.error(error);
