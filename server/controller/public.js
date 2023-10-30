@@ -93,7 +93,7 @@ exports.dalleAPI = async (req, res, next) => {
 
             const options = {
               unique_filename: true,
-              overwrite: true,
+              overwrite: false,
               public_id: "Dalle/image" + name,
             };
 
