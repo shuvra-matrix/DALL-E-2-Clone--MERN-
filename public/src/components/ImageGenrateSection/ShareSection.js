@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 
 const ShareSection = (props) => {
   const [isRedirect, setRedirect] = useState(false);
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -30,8 +29,6 @@ const ShareSection = (props) => {
       console.error(error);
     }
   };
-
-  console.log("hi");
 
   return (
     <div className={styles.share}>

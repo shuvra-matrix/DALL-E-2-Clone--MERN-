@@ -15,4 +15,6 @@ router.get("/api/v1/get/community", publicController.getCommunityData);
 
 router.post("/api/v1/dalle/community", publicController.sendCommunity);
 
+router.post("/api/v1/post/community", publicController.getCommunityDataByQuery);
+
 module.exports = router;

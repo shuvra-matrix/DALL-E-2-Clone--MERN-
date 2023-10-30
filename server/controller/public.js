@@ -5,6 +5,7 @@ const axios = require("axios");
 const { validationResult } = require("express-validator");
 const cloudinary = require("cloudinary").v2;
 const CommunityModel = require("../model/community");
+const community = require("../model/community");
 
 cloudinary.config({
   cloud_name: "dqone7ala",
@@ -170,6 +171,29 @@ exports.sendCommunity = (req, res, next) => {
     .then((result) => {
       console.log(result);
       res.status(200).json({ message: "done" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(200).json({ message: "error" });
+    });
+};
+
+exports.getCommunityDataByQuery = (req, res, next) => {
+  const query = req.body.query;
+
+  const nameCondition = {
+    "communityData.name": { $regex: query, $options: "i" },
+  };
+
+  const promptCondition = {
+    "communityData.query": { $regex: query, $options: "i" },
+  };
+
+  community
+    .find({ $or: [nameCondition, promptCondition] })
+    .then((result) => {
+      res.status(200).json(result);
+      console.log(result);
     })
     .catch((err) => {
       console.log(err);
