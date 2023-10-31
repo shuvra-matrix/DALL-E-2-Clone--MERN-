@@ -14,7 +14,7 @@ const Community = () => {
     setIsLoader(true);
     console.log("api");
     const imageData = async () => {
-      const url = "http://localhost:3030/api/v1/get/community";
+      const url = "https://dalle2-api.onrender.com/api/v1/get/community";
       const options = {
         method: "GET",
         headers: {
@@ -45,7 +45,7 @@ const Community = () => {
 
   useEffect(() => {
     const getQueryData = async () => {
-      const url = "http://localhost:3030/api/v1/post/community";
+      const url = "https://dalle2-api.onrender.com/api/v1/post/community";
 
       const options = {
         method: "POST",

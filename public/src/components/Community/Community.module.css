@@ -32,6 +32,7 @@ label {
 .image-section {
   margin: 2rem auto;
   display: grid;
+  height: 250px;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 250px);
   gap: 15px;
