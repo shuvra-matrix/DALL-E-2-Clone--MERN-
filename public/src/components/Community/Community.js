@@ -1,17 +1,20 @@
 import styles from "./Community.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Loder2 from "../UI/Loder2";
 
 const Community = () => {
   const [imageData, setImageData] = useState([]);
   const [enterQuery, setEnteredQuery] = useState("");
   const [imageSearchData, setImageSearchData] = useState([]);
   const [imageFound, setImageFound] = useState(true);
+  const [isLoader, setIsLoader] = useState(false);
 
   useEffect(() => {
+    setIsLoader(true);
     console.log("api");
     const imageData = async () => {
-      const url = "https://dalle2-api.onrender.com/api/v1/get/community";
+      const url = "http://localhost:3030/api/v1/get/community";
       const options = {
         method: "GET",
         headers: {
@@ -24,8 +27,10 @@ const Community = () => {
       try {
         const response = await fetch(url, options);
         const result = await response.json();
+        setIsLoader(false);
         setImageData(result);
       } catch (error) {
+        setIsLoader(false);
         console.error(error);
       }
     };
@@ -40,7 +45,7 @@ const Community = () => {
 
   useEffect(() => {
     const getQueryData = async () => {
-      const url = "https://dalle2-api.onrender.com/api/v1/post/community";
+      const url = "http://localhost:3030/api/v1/post/community";
 
       const options = {
         method: "POST",
@@ -54,6 +59,7 @@ const Community = () => {
       };
 
       try {
+        setIsLoader(false);
         const response = await fetch(url, options);
         const result = await response.json();
 
@@ -63,12 +69,16 @@ const Community = () => {
           setImageFound(false);
         }
       } catch (error) {
+        setIsLoader(false);
         console.error(error);
       }
     };
 
     const interval = setTimeout(() => {
-      if (enterQuery.length > 0) getQueryData();
+      if (enterQuery.length > 0) {
+        setIsLoader(true);
+        getQueryData();
+      }
     }, 500);
 
     return () => {
@@ -93,6 +103,9 @@ const Community = () => {
           placeholder="Search somthing...."
         ></input>
       </div>
+
+      {isLoader && <Loder2 />}
+
       {imageFound ? (
         enterQuery.length > 0 ? (
           <div className={styles["image-section"]}>
