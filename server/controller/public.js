@@ -1,4 +1,3 @@
-const ApiAccess = require("../model/apiAccess");
 const User = require("../model/query");
 require("dotenv").config();
 const axios = require("axios");
@@ -6,6 +5,7 @@ const { validationResult } = require("express-validator");
 const cloudinary = require("cloudinary").v2;
 const CommunityModel = require("../model/community");
 const community = require("../model/community");
+const { Readable } = require("stream");
 
 cloudinary.config({
   cloud_name: "dqone7ala",
@@ -18,135 +18,84 @@ exports.getApi = (req, res, next) => {
 };
 
 exports.dalleAPI = async (req, res, next) => {
-  const API = process.env.API_LIST.split(",");
-  const host = req.headers["dalle-host"] || "";
-  const key = req.headers["dalle-key"] || "";
   const query = req.body.query;
   const name = req.body.name;
 
   const error = validationResult(req);
 
   if (!error.isEmpty()) {
-    console.log(error.array());
-    return res.status(500).json({
-      error: "error",
-      message: "Invalid Input Data",
-    });
+    const err = new Error("Invalid Input Data");
+    err.statusCode = 403;
+    return next(err);
   }
 
-  let currentApiIndex = req.global[0]["apikeyindex"];
-  let maxApiIndex = req.global[0]["maxApiKey"];
+  const uniqueFileName =
+    name + "-" + Date.now() + "-" + Math.round(Math.random() * 1e9);
+  const filenameExtend = Math.floor(Math.random() * 100 + 100);
 
-  if (currentApiIndex === maxApiIndex) {
-    req.global[0]["apikeyindex"] = 0;
-    req.global[0]
-      .save()
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    currentApiIndex = req.global[0]["apikeyindex"];
-  }
+  const API_URL =
+    "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1";
 
-  console.log(query);
-  console.log(name);
-
-  ApiAccess.find({ _id: process.env.API_ID }).then((result) => {
-    const serverKey = result[0].key;
-    const serverHost = result[0].host;
-
-    if (
-      serverHost.toString() === host.toString() &&
-      serverKey.toString() === key.toString()
-    ) {
-      const options = {
-        method: "POST",
-        url: "https://openai80.p.rapidapi.com/images/generations",
+  try {
+    const response = await axios.post(
+      API_URL,
+      { inputs: query + filenameExtend },
+      {
         headers: {
-          "content-type": "application/json",
-          "Accept-Encoding": "gzip,deflate,compress",
-          "X-RapidAPI-Key": API[currentApiIndex].trim(),
-          "X-RapidAPI-Host": "openai80.p.rapidapi.com",
+          Authorization: process.env.API_KEY,
         },
-        data: {
-          prompt: query,
-          n: 1,
-          size: "1024x1024",
-        },
-      };
-
-      try {
-        axios
-          .request(options)
-          .then((response) => {
-            const remainingToken =
-              response.headers["x-ratelimit-tokens-remaining"];
-            console.log(remainingToken);
-            if (remainingToken <= 1000) {
-              req.global[0].apikeyindex = currentApiIndex + 1;
-              req.global[0].save().then((res) => {
-                ///
-              });
-            }
-
-            const uniqueFileName =
-              name + "-" + Date.now() + "-" + Math.round(Math.random() * 1e9);
-
-            const options = {
-              unique_filename: false,
-              overwrite: true,
-              public_id: "Dalle/image" + uniqueFileName,
-            };
-
-            cloudinary.uploader.upload(
-              response.data.data[0]["url"],
-              options,
-              (error, result) => {
-                if (error) {
-                  return res
-                    .status(500)
-                    .json({ message: "Server did't respond", error: "error" });
-                }
-                const user = new User({
-                  ip: req.clientIp,
-                  name: name,
-                  query: query,
-                  imageUrl: result["secure_url"],
-                });
-                user
-                  .save()
-                  .then((result) => {
-                    console.log(result);
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-
-                res.status(200).json({
-                  imageUrl: result["secure_url"],
-                  name: name,
-                  query: query,
-                });
-              }
-            );
-          })
-          .catch((error) => {
-            console.log(error);
-            res
-              .status(500)
-              .json({ message: "Server did't respond", error: "error" });
-          });
-      } catch (error) {
-        res
-          .status(500)
-          .json({ message: "Server did't respond", error: "error" });
+        responseType: "arraybuffer",
       }
-    } else {
-      res.status(500).json({ message: "Invalid Credentials", error: "error" });
-    }
-  });
+    );
+
+    const buffer = Buffer.from(response.data, "binary");
+
+    const imgOptions = {
+      unique_filename: false,
+      overwrite: true,
+      public_id: "Dalle/image" + uniqueFileName,
+    };
+
+    const writeBuffer = cloudinary.uploader.upload_stream(
+      imgOptions,
+      (err, result) => {
+        if (err) {
+          const error = new Error("Server didn't respond");
+          error.statusCode = 500;
+          throw error;
+        }
+
+        const user = new User({
+          ip: req.clientIp,
+          name: name,
+          query: query,
+          imageUrl: result.secure_url,
+        });
+
+        user
+          .save()
+          .then((result) => {
+            console.log(result);
+            res.status(200).json({
+              imageUrl: result.imageUrl,
+              name: name,
+              query: query,
+            });
+          })
+          .catch((err) => {
+            err.statusCode = err.statusCode || 500;
+            throw err;
+          });
+      }
+    );
+
+    const readStream = Readable.from(buffer);
+    readStream.pipe(writeBuffer);
+  } catch (error) {
+    error.statusCode = error.response?.status || 500;
+    error.message = "Server didn't respond";
+    next(error);
+  }
 };
 
 exports.getCommunityData = (req, res, next) => {

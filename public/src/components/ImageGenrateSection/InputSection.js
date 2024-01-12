@@ -13,7 +13,7 @@ const InputSection = () => {
   const userDataHandler = async (data) => {
     setLoder(true);
     setIsError(false);
-    const url = "https://dalle2-api.onrender.com/api/v1/dalle";
+    const url = "http://localhost:3030/api/v1/dalle";
     const options = {
       method: "POST",
 
@@ -34,20 +34,20 @@ const InputSection = () => {
       const response = await fetch(url, options);
       const result = await response.json();
       setLoder(false);
+
       if (result.error === "error") {
-        const message = result.message;
-        setErrorMessage(message);
-        setIsError(true);
+        throw Error(result);
       } else {
         setIsError(false);
         setQueryResult(result);
         setImageUrl(result.imageUrl);
       }
     } catch (error) {
-      console.error(error);
       setLoder(false);
-      setErrorMessage("Server did't respond");
+      setErrorMessage("server error. Please wait a moment and try again.");
       setIsError(true);
+      setQueryResult(null);
+      setImageUrl("");
     }
   };
 

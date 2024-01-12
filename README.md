@@ -1,6 +1,6 @@
 # DALL-E 2 Clone - Text-to-Image Generation Web App
 
-DALL-E 2 is a cutting-edge web application that harnesses the power of AI to generate images from text descriptions. Inspired by OpenAI's DALL-E model, this app allows users to unleash their creativity by converting textual ideas into stunning visual artwork.
+DALL-E 2 is a cutting-edge web application that harnesses the power of AI to generate images from text descriptions. Inspired by Stable Defusion 2.1, this app allows users to unleash their creativity by converting textual ideas into stunning visual artwork.
 
 ## Live Demo
 
@@ -10,7 +10,7 @@ DALL-E 2 is a cutting-edge web application that harnesses the power of AI to gen
 
 - **Text-to-Image Generation:** Input a text description, and DALL-E 2 will generate an image that matches your description.
 
-- **OpenAI API Integration:** Utilizes the OpenAI API from RapidAPI to power the image generation process.
+- **Hugging Face API Integration:** Utilizes the Hugging Face API to power the image generation process with the Stable Defusion 2.1 model.
 
 ## Technologies Used
 
@@ -42,8 +42,7 @@ To run DALL-E 2 locally, follow these steps:
 
     export MONGO_USER=<mongodb-username>
     export MONGO_PASS=<mongodb-password>
-    export API_LIST=<openai-api-key>
-    export API_ID=<openai-id>
+    export API_KEY=<HUGGING FACE KEY>
 
     ```
 
@@ -93,9 +92,13 @@ To run DALL-E 2 locally, follow these steps:
 
 4. If you don't remember any prompt then click surprise me and generate.
 
-## Thank You, OpenAI!
+## Model Transition
 
-I want to express our gratitude to OpenAI for their groundbreaking research and for providing access to the incredible DALL-E model through their API. This project would not have been possible without OpenAI's contributions to the field of artificial intelligence.
+Previously, DALL-E 2 utilized the Apine AI DALL-E 2 model. Due to some API-related issues, we have transitioned to the Stable Defusion 2.1 model. This change ensures a more stable and reliable experience for our users.
+
+## Thank You, HuggingFace and StabilityAi
+
+I want to express our gratitude to HuggingFace and Stabilityai for their groundbreaking research and for providing access to the incredible Stable Diffusion v2-1 Model through their HuggingFace Inference API. This project would not have been possible without Stabilityai contributions to the field of artificial intelligence.
 
 ## Disclaimer
 

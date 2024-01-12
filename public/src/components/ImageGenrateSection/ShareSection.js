@@ -8,7 +8,7 @@ const ShareSection = (props) => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const url = "https://dalle2-api.onrender.com/api/v1/dalle/community";
+    const url = "http://localhost:3030/api/v1/dalle/community";
     const options = {
       method: "POST",
 
