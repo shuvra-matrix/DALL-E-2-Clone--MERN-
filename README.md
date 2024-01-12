@@ -94,7 +94,7 @@ To run DALL-E 2 locally, follow these steps:
 
 ## Model Transition
 
-Previously, DALL-E 2 utilized the Apine AI DALL-E 2 model. Due to some API-related issues, we have transitioned to the Stable Defusion 2.1 model. This change ensures a more stable and reliable experience for our users.
+Previously, I used Open AI DALL-E 2 model. Due to some API-related issues, we have transitioned to the Stable Defusion 2.1 model. This change ensures a more stable and reliable experience for our users.
 
 ## Thank You, HuggingFace and StabilityAi
 
