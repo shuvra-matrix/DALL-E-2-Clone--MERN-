@@ -2,6 +2,8 @@
 
 DALL-E 2 is a cutting-edge web application that harnesses the power of AI to generate images from text descriptions. Inspired by Stable Defusion 2.1, this app allows users to unleash their creativity by converting textual ideas into stunning visual artwork.
 
+![Image Description](https://github.com/shuvra-matrix/images/blob/main/Screenshot%202024-01-28%20095127.png?raw=true)
+
 ## Live Demo
 
 [https://dalle2ai.netlify.app/](https://dalle2ai.netlify.app/)
